@@ -1,3 +1,12 @@
+# ไฟล์ลับ ห้ามขึ้น GitHub เด็ดขาด
 *.pem
 *kubeconfig*
 .env
+kata-config
+
+# ไฟล์ของระบบปฏิบัติการ
+.DS_Store
+Thumbs.db
+
+# ไฟล์ชั่วคราวของ Python
+__pycache__/
