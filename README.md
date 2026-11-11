@@ -35,6 +35,36 @@ flowchart LR
 
 `bench.py` สั่งสร้าง pod ผ่าน kubectl แล้วจับเวลา ส่วน RAM ต้องดูจากในเครื่อง worker โดยตรง จึงใช้ `bench-mem.sh` ที่รันบน worker
 
+## ใช้ pod ตั้งแต่สร้างจนลบ (ทุกคน)
+
+ให้เปลี่ยน `dev-pooad` เป็น namespace ของตัวเอง และ `test` เป็นชื่อ pod ที่ต้องการ
+
+```bash
+# 1) สร้าง pod
+kubectl run test -n dev-pooad --image=nginx:alpine                    # แบบ runc
+kubectl run test -n dev-pooad --image=nginx:alpine \
+  --overrides='{"spec":{"runtimeClassName":"kata"}}'                  # แบบ kata
+
+# 2) รอจนพร้อม แล้วเช็กสถานะ
+kubectl wait -n dev-pooad --for=condition=Ready pod/test
+kubectl get pods -n dev-pooad
+
+# 3) ใช้งาน
+kubectl exec -it test -n dev-pooad -- sh           # เข้าไปใน pod (พิมพ์ exit เพื่อออก)
+kubectl exec test -n dev-pooad -- free -m          # ดู RAM ในมุมของ pod
+kubectl logs test -n dev-pooad                     # ดู log
+kubectl describe quota -n dev-pooad                # ดูว่าใช้โควตาไปเท่าไร
+
+# 4) ลบเมื่อใช้เสร็จ (สำคัญ)
+kubectl delete pod test -n dev-pooad
+```
+
+**ทำไมต้องลบ:** แต่ละ namespace มีโควตา 1Gi และสร้างได้สูงสุด 5 pod โดย pod แบบ Kata 1 ตัวจอง 288Mi (ตัวแอป 128Mi + VM 160Mi) จึงเปิดค้างได้แค่ประมาณ 3 ตัว อีกทั้ง pod ที่เปิดค้างไว้ยังกิน RAM ของ worker และทำให้ผลวัดของคนอื่นเพี้ยนได้
+
+**ข้อยกเว้น:** `bench.py` สร้างและลบ pod ให้เองอัตโนมัติ จึงไม่ต้องลบเอง
+
+**ถ้าลืมลบหรือสร้างไม่ขึ้น** (`exceeded quota`) ให้ดูว่ามี pod อะไรค้างอยู่ด้วย `kubectl get pods -n dev-pooad` แล้วลบตัวที่ไม่ใช้ทิ้ง
+
 ## ใช้งาน `bench.py` (pooad)
 
 สิ่งที่ต้องมีคือ Python 3 และ kubeconfig ของตัวเอง (บน Windows ติดตั้ง Python ด้วย `winget install -e --id Python.Python.3.12`)
