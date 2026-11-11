@@ -1,0 +1,14 @@
+# RuntimeClass "kata": ตัวเลือกให้ pod รันใน VM ของ Kata
+# ใช้งาน: ใส่ runtimeClassName: kata ใน spec ของ pod
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: kata
+handler: kata
+overhead:
+  podFixed:           # RAM/CPU ที่ VM ใช้เพิ่ม นับเข้าโควตาด้วย
+    cpu: 100m
+    memory: 160Mi
+scheduling:
+  nodeSelector:       # ส่ง pod Kata ไปเฉพาะเครื่องที่ติดตั้ง Kata ไว้
+    katacontainers.io/kata-runtime: "true"
