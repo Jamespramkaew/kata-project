@@ -1,0 +1,161 @@
+# ห้อง (namespace) ของสมาชิก 5 คน พร้อมโควตาและค่า default
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-pete
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: dev-pete
+spec:
+  hard:
+    pods: "5"
+    requests.cpu: 400m
+    requests.memory: 1Gi
+    limits.memory: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: defaults
+  namespace: dev-pete
+spec:
+  limits:
+    - type: Container
+      defaultRequest:   # ค่าที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 50m
+        memory: 128Mi
+      default:          # เพดานที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 500m
+        memory: 256Mi
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-mawn
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: dev-mawn
+spec:
+  hard:
+    pods: "5"
+    requests.cpu: 400m
+    requests.memory: 1Gi
+    limits.memory: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: defaults
+  namespace: dev-mawn
+spec:
+  limits:
+    - type: Container
+      defaultRequest:   # ค่าที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 50m
+        memory: 128Mi
+      default:          # เพดานที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 500m
+        memory: 256Mi
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-james
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: dev-james
+spec:
+  hard:
+    pods: "5"
+    requests.cpu: 400m
+    requests.memory: 1Gi
+    limits.memory: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: defaults
+  namespace: dev-james
+spec:
+  limits:
+    - type: Container
+      defaultRequest:   # ค่าที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 50m
+        memory: 128Mi
+      default:          # เพดานที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 500m
+        memory: 256Mi
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-film
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: dev-film
+spec:
+  hard:
+    pods: "5"
+    requests.cpu: 400m
+    requests.memory: 1Gi
+    limits.memory: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: defaults
+  namespace: dev-film
+spec:
+  limits:
+    - type: Container
+      defaultRequest:   # ค่าที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 50m
+        memory: 128Mi
+      default:          # เพดานที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 500m
+        memory: 256Mi
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-pooad
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: dev-pooad
+spec:
+  hard:
+    pods: "5"
+    requests.cpu: 400m
+    requests.memory: 1Gi
+    limits.memory: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: defaults
+  namespace: dev-pooad
+spec:
+  limits:
+    - type: Container
+      defaultRequest:   # ค่าที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 50m
+        memory: 128Mi
+      default:          # เพดานที่ใส่ให้ถ้า pod ไม่ได้ระบุ
+        cpu: 500m
+        memory: 256Mi

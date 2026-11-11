@@ -1,0 +1,102 @@
+# บัญชีของสมาชิกแต่ละคน และสิทธิ์ edit เฉพาะห้องของตัวเอง
+# token สร้างแยก ไม่เก็บใน GitHub
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pete
+  namespace: dev-pete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pete-edit
+  namespace: dev-pete
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: pete
+    namespace: dev-pete
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mawn
+  namespace: dev-mawn
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: mawn-edit
+  namespace: dev-mawn
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: mawn
+    namespace: dev-mawn
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: james
+  namespace: dev-james
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: james-edit
+  namespace: dev-james
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: james
+    namespace: dev-james
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: film
+  namespace: dev-film
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: film-edit
+  namespace: dev-film
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: film
+    namespace: dev-film
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pooad
+  namespace: dev-pooad
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pooad-edit
+  namespace: dev-pooad
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+  - kind: ServiceAccount
+    name: pooad
+    namespace: dev-pooad
