@@ -53,9 +53,13 @@ kata:  [nginx] ── เคอร์เนล VM ── qemu ── เคอ�
 
 ## ภาพหน้าจอ
 
-- `01-pods-same-node.png`: pod ทั้งสองตัวอยู่ node เดียวกัน
-- `02-kata-results.png`: ผลของ `sec-kata`
-- `03-runc-results.png`: ผลของ `sec-runc`
+**Kata** (ด้านบนเป็น `kubectl get pods -o wide` ที่เห็นว่าทั้งสองตัวอยู่ node เดียวกัน)
+
+![ผลทดสอบ Kata](Kata_Test.png)
+
+**runc** (รวม `dmesg` exit code และ `/dev/core`)
+
+![ผลทดสอบ runc](Runc_Test.png)
 
 ## ถ้าจะรันซ้ำบน Windows (Git Bash)
 
