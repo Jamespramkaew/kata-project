@@ -28,12 +28,12 @@ done
 OUT="bench/final/mem-$(date +%Y%m%d-%H%M%S).csv"
 TMP=$(mktemp -d)
 scp -q -i ~/.ssh/kata-key.pem "ubuntu@100.124.98.29:results/mem-*.csv" "$TMP/"
-echo "runtime,round,process,count,rss_mb" > "$OUT"
+echo "runtime,round,process,rss_mb" > "$OUT"
 for rt in runc kata; do
   i=0
   for f in $(ls "$TMP"/mem-$rt-*.csv | sort); do
     i=$((i+1))
-    tail -n +2 "$f" | awk -F, -v r="$i" 'BEGIN{OFS=","}{print $1,r,$2,$3,$4}' >> "$OUT"
+    tail -n +2 "$f" | awk -F, -v r="$i" 'BEGIN{OFS=","}{n=split($2,a,"/");p=a[n];sub(/:$/,"",p);print $1,r,p,$3}' >> "$OUT"
   done
 done
 rm -rf "$TMP"
