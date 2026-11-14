@@ -1,0 +1,11 @@
+test,runtime,round,seconds,namespace,measured_at,client_os
+start,kata,1,3.537,dev-pooad,20261113-225859,Windows
+start,kata,2,3.519,dev-pooad,20261113-225859,Windows
+start,kata,3,3.569,dev-pooad,20261113-225859,Windows
+start,kata,4,3.531,dev-pooad,20261113-225859,Windows
+start,kata,5,3.570,dev-pooad,20261113-225859,Windows
+start,kata,6,3.590,dev-pooad,20261113-225859,Windows
+start,kata,7,3.516,dev-pooad,20261113-225859,Windows
+start,kata,8,3.538,dev-pooad,20261113-225859,Windows
+start,kata,9,3.570,dev-pooad,20261113-225859,Windows
+start,kata,10,3.505,dev-pooad,20261113-225859,Windows
